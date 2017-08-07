@@ -378,7 +378,7 @@
                     "name": "dataSetName",
                     "type": "String",
                     "info": "Name of the dataset to forecast.",
-                    "required": false
+                    "required": true
                 },
                 {
                     "name": "targetColumn",
@@ -390,13 +390,13 @@
                     "name": "startDate",
                     "type": "DatePicker",
                     "info": "Format - date-time (as date-time in ISO8601). First date to forecast.",
-                    "required": false
+                    "required": true
                 },
                 {
                     "name": "endDate",
                     "type": "DatePicker",
                     "info": "Format - date-time (as date-time in ISO8601). Last date to forecast.",
-                    "required": false
+                    "required": true
                 },
                 {
                     "name": "resultInterval",
@@ -449,7 +449,7 @@
                     "name": "dataSetName",
                     "type": "String",
                     "info": "Name of the dataset for which to determine impact.",
-                    "required": false
+                    "required": true
                 },
                 {
                     "name": "targetColumn",
@@ -480,13 +480,13 @@
                     "name": "startDate",
                     "type": "DatePicker",
                     "info": "Format - date-time (as date-time in ISO8601). First date of the event.",
-                    "required": false
+                    "required": true
                 },
                 {
                     "name": "endDate",
                     "type": "DatePicker",
                     "info": "Format - date-time (as date-time in ISO8601). Last date of the event.",
-                    "required": false
+                    "required": true
                 },
                 {
                     "name": "callbackUrl",
@@ -526,7 +526,7 @@
                     "name": "sessionId",
                     "type": "String",
                     "info": "Format - uuid. The Id of the session to delete.",
-                    "required": false
+                    "required": true
                 }
             ],
             "callbacks": [
@@ -558,7 +558,7 @@
                         "Impact"
                     ],
                     "info": "The type of session to be deleted (Forecast or Impact).",
-                    "required": false
+                    "required": true
                 },
                 {
                     "name": "dataSetName",
