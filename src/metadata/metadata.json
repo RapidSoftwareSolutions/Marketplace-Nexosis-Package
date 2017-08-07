@@ -1,0 +1,702 @@
+{
+    "package": "Nexosis",
+    "tagline": "Nexosis API",
+    "description": "Machine Learning for Developers.",
+    "image": "https:\/\/logo.clearbit.com\/nexosis.com",
+    "repo": "https:\/\/github.com\/RapidSoftwareSolutions\/Marketplace-Nexosis-Package",
+    "keywords": [
+        "API",
+        "developers",
+        "machine",
+        "learning"
+    ],
+    "accounts": {
+        "domain": "nexosis.com",
+        "credentials": [
+            "apiKey"
+        ]
+    },
+    "blocks": [
+        {
+            "name": "addDataToDataset",
+            "description": "This operation creates a new dataset with the specified rows, or if the dataset already exists, adds rows to the dataset. If the specified data contains records with timestamps that already exist in the dataset, those records will be overwritten.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Subscription key which provides access to this API. Found in your Profile.",
+                    "required": true
+                },
+                {
+                    "name": "dataSetName",
+                    "type": "String",
+                    "info": "Name of the dataset to which to add data.",
+                    "required": true
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteDataFromDataset",
+            "description": "If a date range is specified, then only data in that date range is removed from the dataset. Otherwise, all data is removed from the dataset.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Subscription key which provides access to this API. Found in your Profile.",
+                    "required": true
+                },
+                {
+                    "name": "dataSetName",
+                    "type": "String",
+                    "info": "Name of the dataset from which to remove data",
+                    "required": true
+                },
+                {
+                    "name": "startDate",
+                    "type": "DatePicker",
+                    "info": "Format - date-time (as date-time in ISO8601). Limits data removed to those on or after the specified date.",
+                    "required": false
+                },
+                {
+                    "name": "endDate",
+                    "type": "DatePicker",
+                    "info": "Format - date-time (as date-time in ISO8601). Limits data removed to those on or before the specified date.",
+                    "required": false
+                },
+                {
+                    "name": "cascade",
+                    "type": "Select",
+                    "options": [
+                        "forecast",
+                        "sessions"
+                    ],
+                    "info": "Options for cascading the delete. When cascade=forecast, also deletes forecasts for the dataset. When cascade=sessions, also deletes sessions associated with the dataset. If start and\/or end date are supplied, sessions requested in that date range are deleted.",
+                    "required": false
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getAllDatasets",
+            "description": "Gets the list of datasets that have been uploaded.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Subscription key which provides access to this API. Found in your Profile.",
+                    "required": true
+                },
+                {
+                    "name": "partialName",
+                    "type": "String",
+                    "info": "Limits results to only those datasets with names containing the specified value.",
+                    "required": false
+                },
+                {
+                    "name": "page",
+                    "type": "Number",
+                    "info": "Format - int32. Zero-based page number of datasets to retrieve.",
+                    "required": false
+                },
+                {
+                    "name": "pageSize",
+                    "type": "Number",
+                    "info": "Format - int32. Count of datasets to retrieve in each page (max 1000).",
+                    "required": false
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getSingleDataset",
+            "description": "Gets the data for a particular dataset.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Subscription key which provides access to this API. Found in your Profile.",
+                    "required": true
+                },
+                {
+                    "name": "dataSetName",
+                    "type": "String",
+                    "info": "Name of the dataset for which to retrieve data.",
+                    "required": true
+                },
+                {
+                    "name": "startDate",
+                    "type": "DatePicker",
+                    "info": "Format - date-time (as date-time in ISO8601). Limits data removed to those on or after the specified date.",
+                    "required": false
+                },
+                {
+                    "name": "endDate",
+                    "type": "DatePicker",
+                    "info": "Format - date-time (as date-time in ISO8601). Limits data removed to those on or before the specified date.",
+                    "required": false
+                },
+                {
+                    "name": "page",
+                    "type": "Number",
+                    "info": "Format - int32. Zero-based page number of datasets to retrieve.",
+                    "required": false
+                },
+                {
+                    "name": "pageSize",
+                    "type": "Number",
+                    "info": "Format - int32. Count of datasets to retrieve in each page (max 1000).",
+                    "required": false
+                },
+                {
+                    "name": "include",
+                    "type": "List",
+                    "info": "Limits results to the specified columns.",
+                    "required": false,
+                    "structure": {
+                        "name": "column",
+                        "type": "String",
+                        "info": "Single column."
+                    }
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "importFromS3",
+            "description": "Import data into Axon from a file on S3.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Subscription key which provides access to this API. Found in your Profile.",
+                    "required": true
+                },
+                {
+                    "name": "dataSetName",
+                    "type": "String",
+                    "info": "Name of the dataset.",
+                    "required": true
+                },
+                {
+                    "name": "bucket",
+                    "type": "String",
+                    "info": "S3 bucket.",
+                    "required": true
+                },
+                {
+                    "name": "path",
+                    "type": "String",
+                    "info": "S3 path.",
+                    "required": true
+                },
+                {
+                    "name": "region",
+                    "type": "String",
+                    "info": "Bucket region.",
+                    "required": false
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getAllImports",
+            "description": "Gets the list of imports that have been created for the company associated with your account.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Subscription key which provides access to this API. Found in your Profile.",
+                    "required": true
+                },
+                {
+                    "name": "dataSetName",
+                    "type": "String",
+                    "info": "Limits imports to those for a particular dataset.",
+                    "required": false
+                },
+                {
+                    "name": "requestedAfterDate",
+                    "type": "DatePicker",
+                    "info": "Format - date-time (as date-time in ISO8601). Limits imports to those requested on or after the specified date.",
+                    "required": false
+                },
+                {
+                    "name": "requestedBeforeDate",
+                    "type": "DatePicker",
+                    "info": "Format - date-time (as date-time in ISO8601). Limits imports to those requested on or before the specified date.",
+                    "required": false
+                },
+                {
+                    "name": "page",
+                    "type": "Number",
+                    "info": "Format - int32. Zero-based page number of datasets to retrieve.",
+                    "required": false
+                },
+                {
+                    "name": "pageSize",
+                    "type": "Number",
+                    "info": "Format - int32. Count of datasets to retrieve in each page (max 1000).",
+                    "required": false
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getSingleImport",
+            "description": "Retrieve information about request to import data into Axon.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Subscription key which provides access to this API. Found in your Profile.",
+                    "required": true
+                },
+                {
+                    "name": "importId",
+                    "type": "String",
+                    "info": "Format - uuid. The Id of the Import.",
+                    "required": false
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createForecastSession",
+            "description": "Forecast sessions are used to predict future values for a dataset. To create a forecast session, specify the dataset to forecast, as well as the start and end dates of the forecast period. The Nexosis API will execute a series of machine learning algorithms to approximate future values for the dataset. The forecast start date should be on the same day as (or before) the last date in the dataset. If there is a gap between your forecast start date and the date of the last record in your data set, the Nexosis API will behave as if there is no gap.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Subscription key which provides access to this API. Found in your Profile.",
+                    "required": true
+                },
+                {
+                    "name": "dataSetName",
+                    "type": "String",
+                    "info": "Name of the dataset to forecast.",
+                    "required": false
+                },
+                {
+                    "name": "targetColumn",
+                    "type": "String",
+                    "info": "Column in the specified dataset to forecast.",
+                    "required": false
+                },
+                {
+                    "name": "startDate",
+                    "type": "datePicker",
+                    "info": "Format - date-time (as date-time in ISO8601). First date to forecast.",
+                    "required": false
+                },
+                {
+                    "name": "endDate",
+                    "type": "datePicker",
+                    "info": "Format - date-time (as date-time in ISO8601). Last date to forecast.",
+                    "required": false
+                },
+                {
+                    "name": "resultInterval",
+                    "type": "Select",
+                    "options": [
+                        "Hour",
+                        "Day",
+                        "Week",
+                        "Month",
+                        "Year"
+                    ],
+                    "info": "The interval at which predictions should be generated. Possible values are Hour, Day, Week, Month, and Year. Defaults to Day.",
+                    "required": false
+                },
+                {
+                    "name": "callbackUrl",
+                    "type": "String",
+                    "info": "The Webhook url that will receive updates when the Session status changes. If you provide a callback url, your response will contain a header named Nexosis - Webhook - Token.You will receive this same header in the request message to your Webhook,which you can use to validate that the message came from Nexosis.",
+                    "required": false
+                },
+                {
+                    "name": "isEstimate",
+                    "type": "Boolean",
+                    "info": "If specified, the session will not be processed. The returned Nexosis-Request-Cost header will be populated with the estimated cost that the request would have incurred.",
+                    "required": false
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createImpactSession",
+            "description": "Impact sessions are used to determine the impact of a particular event on a dataset. For example, a sale at a restaurant may impact daily sales or customer counts.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Subscription key which provides access to this API. Found in your Profile.",
+                    "required": true
+                },
+                {
+                    "name": "dataSetName",
+                    "type": "String",
+                    "info": "Name of the dataset for which to determine impact.",
+                    "required": false
+                },
+                {
+                    "name": "targetColumn",
+                    "type": "String",
+                    "info": "Column in the specified dataset for which to determine impact.",
+                    "required": false
+                },
+                {
+                    "name": "eventName",
+                    "type": "String",
+                    "info": "Name of the event for which to determine impact.",
+                    "required": false
+                },
+                {
+                    "name": "resultInterval",
+                    "type": "Select",
+                    "options": [
+                        "Hour",
+                        "Day",
+                        "Week",
+                        "Month",
+                        "Year"
+                    ],
+                    "info": "The interval at which predictions should be generated. Possible values are Hour, Day, Week, Month, and Year. Defaults to Day.",
+                    "required": false
+                },
+                {
+                    "name": "startDate",
+                    "type": "datePicker",
+                    "info": "Format - date-time (as date-time in ISO8601). First date of the event.",
+                    "required": false
+                },
+                {
+                    "name": "endDate",
+                    "type": "datePicker",
+                    "info": "Format - date-time (as date-time in ISO8601). Last date of the event.",
+                    "required": false
+                },
+                {
+                    "name": "callbackUrl",
+                    "type": "String",
+                    "info": "The Webhook url that will receive updates when the Session status changes",
+                    "required": false
+                },
+                {
+                    "name": "isEstimate",
+                    "type": "Boolean",
+                    "info": "If specified, the session will not be processed. The returned Nexosis-Request-Cost header will be populated with the estimated cost that the request would have incurred.",
+                    "required": false
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteSession",
+            "description": "Removes a single session from your account.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Subscription key which provides access to this API. Found in your Profile.",
+                    "required": true
+                },
+                {
+                    "name": "sessionId",
+                    "type": "String",
+                    "info": "Format - uuid. The Id of the session to delete.",
+                    "required": false
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteAllSession",
+            "description": "Removes Sessions from your account.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Subscription key which provides access to this API. Found in your Profile.",
+                    "required": true
+                },
+                {
+                    "name": "type",
+                    "type": "Select",
+                    "options": [
+                        "Forecast",
+                        "Impact"
+                    ],
+                    "info": "The type of session to be deleted (Forecast or Impact).",
+                    "required": false
+                },
+                {
+                    "name": "dataSetName",
+                    "type": "String",
+                    "info": "Limits sessions to those for a particular dataset.",
+                    "required": false
+                },
+                {
+                    "name": "eventName",
+                    "type": "String",
+                    "info": "Limits impact sessions to those for a particular event.",
+                    "required": false
+                },
+                {
+                    "name": "requestedAfterDate",
+                    "type": "String",
+                    "info": "Format - date-time (as date-time in ISO8601). Limits sessions to those requested on or after the specified date.",
+                    "required": false
+                },
+                {
+                    "name": "requestedBeforeDate",
+                    "type": "String",
+                    "info": "Format - date-time (as date-time in ISO8601). Limits sessions to those requested on or before the specified date.",
+                    "required": false
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getAllSession",
+            "description": "Gets the list of sessions that have been created for the company associated with your account.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Subscription key which provides access to this API. Found in your Profile.",
+                    "required": true
+                },
+                {
+                    "name": "dataSetName",
+                    "type": "String",
+                    "info": "Limits sessions to those for a particular dataset.",
+                    "required": false
+                },
+                {
+                    "name": "eventName",
+                    "type": "String",
+                    "info": "Limits impact sessions to those for a particular event.",
+                    "required": false
+                },
+                {
+                    "name": "requestedAfterDate",
+                    "type": "String",
+                    "info": "Format - date-time (as date-time in ISO8601). Limits sessions to those requested on or after the specified date.",
+                    "required": false
+                },
+                {
+                    "name": "requestedBeforeDate",
+                    "type": "String",
+                    "info": "Format - date-time (as date-time in ISO8601). Limits sessions to those requested on or before the specified date.",
+                    "required": false
+                },
+                {
+                    "name": "page",
+                    "type": "Number",
+                    "info": "Format - int32. Zero-based page number of sessions to retrieve.",
+                    "required": false
+                },
+                {
+                    "name": "pageSize",
+                    "type": "Number",
+                    "info": "Format - int32. Count of sessions to retrieve in each page (max 1000).",
+                    "required": false
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getSessionResult",
+            "description": "Gets the forecast or impact results of a particular session",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Subscription key which provides access to this API. Found in your Profile.",
+                    "required": true
+                },
+                {
+                    "name": "sessionId",
+                    "type": "String",
+                    "info": "Format - uuid. Session identifier for which to retrieve results.",
+                    "required": true
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getSingleSession",
+            "description": "Gets the forecast or impact results of a particular session",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Subscription key which provides access to this API. Found in your Profile.",
+                    "required": true
+                },
+                {
+                    "name": "sessionId",
+                    "type": "String",
+                    "info": "Format - uuid. Session identifier of the session to retrieve.",
+                    "required": true
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getSessionStatus",
+            "description": "The response to this endpoint adds a nexosis-session-status HTTP response header indicating the completion status of the session.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Subscription key which provides access to this API. Found in your Profile.",
+                    "required": true
+                },
+                {
+                    "name": "sessionId",
+                    "type": "String",
+                    "info": "Format - uuid. Session identifier of the session to retrieve.",
+                    "required": true
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        }
+    ]
+}
