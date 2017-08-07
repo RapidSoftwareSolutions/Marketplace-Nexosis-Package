@@ -19,7 +19,7 @@
     "events": [
         {
             "name": "webhookEvent",
-            "description": "This method is called every time a user posts a slash command in a channel",
+            "description": "Event for session",
             "payload":
             { "sessionId": "015c5f15-cbc6-43ee-a7a9-f7af8a456bd1",
                 "type": "forecast",
