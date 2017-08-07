@@ -16,6 +16,46 @@
             "apiKey"
         ]
     },
+    "events": [
+        {
+            "name": "webhookEvent",
+            "description": "This method is called every time a user posts a slash command in a channel",
+            "payload":
+            { "sessionId": "015c5f15-cbc6-43ee-a7a9-f7af8a456bd1",
+                "type": "forecast",
+                "status": "completed",
+                "statusHistory":
+                [ { "date": "2017-05-31T15:18:02.950271+00:00",
+                    "status": "requested" },
+                    { "date": "2017-05-31T15:18:03.0877088+00:00", "status": "started" },
+                    { "date": "2017-05-31T15:23:01.2470011+00:00", "status": "completed" } ],
+                "extraParameters": {},
+                "dataSetName": "my-data-set",
+                "targetColumn": "foo",
+                "startDate": "2017-05-12T00:00:00+00:00",
+                "endDate": "2017-07-01T00:00:00+00:00",
+                "callbackUrl": "https://d8fe87ba.ngrok.io/payload",
+                "isEstimate": false,
+                "resultInterval": "day",
+                "links":
+                [ { "rel": "results",
+                    "href": "https://ml.nexosis.com/v1/sessions/015c5f15-cbc6-43ee-a7a9-f7af8a456bd1/results" },
+                    { "rel": "data",
+                        "href": "https://ml.nexosis.com/v1/data/my-data-set" } ]
+            },
+            "steps": [
+                "Navigate to createForecastSession or createImpactSession block",
+                "Set callbackUrl to __WEBHOOK_URL__"
+            ],
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "string",
+                    "info": "Subscription key",
+                    "required": false
+                }
+            ]
+        }],
     "blocks": [
         {
             "name": "addDataToDataset",
@@ -348,13 +388,13 @@
                 },
                 {
                     "name": "startDate",
-                    "type": "datePicker",
+                    "type": "DatePicker",
                     "info": "Format - date-time (as date-time in ISO8601). First date to forecast.",
                     "required": false
                 },
                 {
                     "name": "endDate",
-                    "type": "datePicker",
+                    "type": "DatePicker",
                     "info": "Format - date-time (as date-time in ISO8601). Last date to forecast.",
                     "required": false
                 },
@@ -438,13 +478,13 @@
                 },
                 {
                     "name": "startDate",
-                    "type": "datePicker",
+                    "type": "DatePicker",
                     "info": "Format - date-time (as date-time in ISO8601). First date of the event.",
                     "required": false
                 },
                 {
                     "name": "endDate",
-                    "type": "datePicker",
+                    "type": "DatePicker",
                     "info": "Format - date-time (as date-time in ISO8601). Last date of the event.",
                     "required": false
                 },
