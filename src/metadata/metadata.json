@@ -574,13 +574,13 @@
                 },
                 {
                     "name": "requestedAfterDate",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "Format - date-time (as date-time in ISO8601). Limits sessions to those requested on or after the specified date.",
                     "required": false
                 },
                 {
                     "name": "requestedBeforeDate",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "Format - date-time (as date-time in ISO8601). Limits sessions to those requested on or before the specified date.",
                     "required": false
                 }
@@ -620,13 +620,13 @@
                 },
                 {
                     "name": "requestedAfterDate",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "Format - date-time (as date-time in ISO8601). Limits sessions to those requested on or after the specified date.",
                     "required": false
                 },
                 {
                     "name": "requestedBeforeDate",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "Format - date-time (as date-time in ISO8601). Limits sessions to those requested on or before the specified date.",
                     "required": false
                 },
