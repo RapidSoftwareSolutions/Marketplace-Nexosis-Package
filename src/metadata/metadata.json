@@ -72,6 +72,12 @@
                     "type": "String",
                     "info": "Name of the dataset to which to add data.",
                     "required": true
+                },
+                {
+                    "name": "data",
+                    "type": "JSON",
+                    "info": "Added data.",
+                    "required": true
                 }
             ],
             "callbacks": [
