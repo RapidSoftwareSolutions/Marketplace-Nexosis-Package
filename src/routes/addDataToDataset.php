@@ -4,7 +4,7 @@ $app->post('/api/Nexosis/addDataToDataset', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['apiKey','dataSetName']);
+    $validateRes = $checkRequest->validate($request, ['apiKey','dataSetName','data']);
 
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
@@ -14,19 +14,18 @@ $app->post('/api/Nexosis/addDataToDataset', function ($request, $response) {
 
     $requiredParams = ['apiKey'=>'apiKey','dataSetName'=>'dataSetName'];
     $optionalParams = [];
-    $bodyParams = [''];
+
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
-    $requestBody = \Models\Params::createRequestBody($data, $bodyParams);
 
     $client = $this->httpClient;
     $query_str = "https://ml.nexosis.com/v1/data/{$data['dataSetName']}";
 
     $requestParams['headers'] = ['Content-Type' => 'application/json', 'api-key' => $data['apiKey']];
-    $requestParams['query'] = $requestBody;
+    $requestParams['json'] = $post_data['args']['data'];
 
     try {
-        $resp = $client->get($query_str, $requestParams);
+        $resp = $client->put($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
         if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {
