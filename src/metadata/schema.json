@@ -16,6 +16,55 @@
       "apiKey"
     ]
   },
+  "events": [{
+    "name": "webhookEvent",
+    "description": "Event for session",
+    "payload": {
+      "sessionId": "015c5f15-cbc6-43ee-a7a9-f7af8a456bd1",
+      "type": "forecast",
+      "status": "completed",
+      "statusHistory": [{
+        "date": "2017-05-31T15:18:02.950271+00:00",
+        "status": "requested"
+      },
+        {
+          "date": "2017-05-31T15:18:03.0877088+00:00",
+          "status": "started"
+        },
+        {
+          "date": "2017-05-31T15:23:01.2470011+00:00",
+          "status": "completed"
+        }
+      ],
+      "extraParameters": {},
+      "dataSetName": "my-data-set",
+      "targetColumn": "foo",
+      "startDate": "2017-05-12T00:00:00+00:00",
+      "endDate": "2017-07-01T00:00:00+00:00",
+      "callbackUrl": "https://d8fe87ba.ngrok.io/payload",
+      "isEstimate": false,
+      "resultInterval": "day",
+      "links": [{
+        "rel": "results",
+        "href": "https://ml.nexosis.com/v1/sessions/015c5f15-cbc6-43ee-a7a9-f7af8a456bd1/results"
+      },
+        {
+          "rel": "data",
+          "href": "https://ml.nexosis.com/v1/data/my-data-set"
+        }
+      ]
+    },
+    "steps": [
+      "Navigate to createForecastSession or createImpactSession block",
+      "Set callbackUrl to __WEBHOOK_URL__"
+    ],
+    "args": [{
+      "name": "apiKey",
+      "type": "string",
+      "info": "Subscription key",
+      "required": false
+    }]
+  }],
   "blocks": [{
     "name": "addDataToDataset",
     "description": "This operation creates a new dataset with the specified rows, or if the dataset already exists, adds rows to the dataset. If the specified data contains records with timestamps that already exist in the dataset, those records will be overwritten.",
@@ -36,7 +85,10 @@
     "request": {
       "method": "get",
       "paramsType": "query",
-      "headers": "['Content-Type' => 'application/json', 'api-key' => $data['apiKey']]"
+      "headers": {
+        "Content-Type": "application/json",
+        "api-key": "{$data['apiKey']}"
+      }
     },
     "callbacks": [{
       "name": "error",
@@ -86,7 +138,10 @@
         "method": "delete",
         "paramsType": "query",
         "bodyParams": ["startDate", "endDate", "cascade"],
-        "headers": "['Content-Type' => 'application/json', 'api-key' => $data['apiKey']]"
+        "headers": {
+          "Content-Type": "application/json",
+          "api-key": "{$data['apiKey']}"
+        }
       },
       "callbacks": [{
         "name": "error",
@@ -129,7 +184,10 @@
         "method": "get",
         "paramsType": "query",
         "bodyParams": ["partialName", "page", "pageSize"],
-        "headers": "['Content-Type' => 'application/json', 'api-key' => $data['apiKey']]"
+        "headers": {
+          "Content-Type": "application/json",
+          "api-key": "{$data['apiKey']}"
+        }
       },
       "callbacks": [{
         "name": "error",
@@ -196,10 +254,9 @@
         "paramsType": "query",
         "bodyParams": ["startDate", "endDate", "page", "pageSize", "include"],
         "headers": {
-          "Content-Type" : "application/json",
-          "api-key" : "{$data['apiKey']}"
-        },
-        "headers": "['Content-Type' => 'application/json', 'api-key' => $data['apiKey']]"
+          "Content-Type": "application/json",
+          "api-key": "{$data['apiKey']}"
+        }
       },
       "callbacks": [{
         "name": "error",
@@ -248,7 +305,10 @@
         "method": "post",
         "paramsType": "json",
         "bodyParams": ["dataSetName", "bucket", "path", "region"],
-        "headers": "['Content-Type' => 'application/json', 'api-key' => $data['apiKey']]"
+        "headers": {
+          "Content-Type": "application/json",
+          "api-key": "{$data['apiKey']}"
+        }
       },
       "callbacks": [{
         "name": "error",
@@ -303,7 +363,10 @@
         "method": "get",
         "paramsType": "query",
         "bodyParams": ["dataSetName", "requestedAfterDate", "requestedBeforeDate", "page", "pageSize"],
-        "headers": "['Content-Type' => 'application/json', 'api-key' => $data['apiKey']]"
+        "headers": {
+          "Content-Type": "application/json",
+          "api-key": "{$data['apiKey']}"
+        }
       },
       "callbacks": [{
         "name": "error",
@@ -333,7 +396,10 @@
       "request": {
         "method": "get",
         "paramsType": "query",
-        "headers": "['Content-Type' => 'application/json', 'api-key' => $data['apiKey']]"
+        "headers": {
+          "Content-Type": "application/json",
+          "api-key": "{$data['apiKey']}"
+        }
       },
       "callbacks": [{
         "name": "error",
@@ -401,7 +467,10 @@
         "method": "post",
         "paramsType": "query",
         "bodyParams": ["dataSetName", "targetColumn", "startDate", "endDate", "resultInterval", "callbackUrl", "isEstimate"],
-        "headers": "['Content-Type' => 'application/json', 'api-key' => $data['apiKey']]"
+        "headers": {
+          "Content-Type": "application/json",
+          "api-key": "{$data['apiKey']}"
+        }
       },
       "callbacks": [{
         "name": "error",
@@ -476,7 +545,10 @@
         "method": "post",
         "paramsType": "query",
         "bodyParams": ["dataSetName", "targetColumn", "eventName", "resultInterval", "startDate", "endDate", "callbackUrl", "isEstimate"],
-        "headers": "['Content-Type' => 'application/json', 'api-key' => $data['apiKey']]"
+        "headers": {
+          "Content-Type": "application/json",
+          "api-key": "{$data['apiKey']}"
+        }
       },
       "callbacks": [{
         "name": "error",
@@ -506,7 +578,10 @@
       "request": {
         "method": "delete",
         "paramsType": "query",
-        "headers": "['Content-Type' => 'application/json', 'api-key' => $data['apiKey']]"
+        "headers": {
+          "Content-Type": "application/json",
+          "api-key": "{$data['apiKey']}"
+        }
       },
       "callbacks": [{
         "name": "error",
@@ -567,7 +642,10 @@
         "method": "delete",
         "paramsType": "query",
         "bodyParams": ["Type", "DataSetName", "EventName", "RequestedAfterDate", "RequestedBeforeDate"],
-        "headers": "['Content-Type' => 'application/json', 'api-key' => $data['apiKey']]"
+        "headers": {
+          "Content-Type": "application/json",
+          "api-key": "{$data['apiKey']}"
+        }
       },
       "callbacks": [{
         "name": "error",
@@ -628,7 +706,10 @@
         "method": "get",
         "paramsType": "query",
         "bodyParams": ["dataSetName", "eventName", "requestedAfterDate", "requestedBeforeDate", "page", "pageSize"],
-        "headers": "['Content-Type' => 'application/json', 'api-key' => $data['apiKey']]"
+        "headers": {
+          "Content-Type": "application/json",
+          "api-key": "{$data['apiKey']}"
+        }
       },
       "callbacks": [{
         "name": "error",
@@ -658,7 +739,10 @@
       "request": {
         "method": "get",
         "paramsType": "query",
-        "headers": "['Content-Type' => 'application/json', 'api-key' => $data['apiKey']]"
+        "headers": {
+          "Content-Type": "application/json",
+          "api-key": "{$data['apiKey']}"
+        }
       },
       "callbacks": [{
         "name": "error",
@@ -688,7 +772,10 @@
       "request": {
         "method": "get",
         "paramsType": "query",
-        "headers": "['Content-Type' => 'application/json', 'api-key' => $data['apiKey']]"
+        "headers": {
+          "Content-Type": "application/json",
+          "api-key": "{$data['apiKey']}"
+        }
       },
       "callbacks": [{
         "name": "error",
@@ -718,7 +805,10 @@
       "request": {
         "method": "head",
         "paramsType": "query",
-        "headers": "['Content-Type' => 'application/json', 'api-key' => $data['apiKey']]"
+        "headers": {
+          "Content-Type": "application/json",
+          "api-key": "{$data['apiKey']}"
+        }
       },
       "callbacks": [{
         "name": "error",
